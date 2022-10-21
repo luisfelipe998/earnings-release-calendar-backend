@@ -7,8 +7,33 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  test:
+    runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        python-version: [3.9]
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Set Up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install pipenv
+        run: pip install pipenv
+
+      - name: Install dependencies
+        run: pipenv install
+
+      - name: Run tests
+        run: make coverage
+  
+  build:
+    needs: test
     runs-on: ubuntu-latest
 
     steps:
@@ -18,7 +43,7 @@ jobs:
         DOCKER_USER: ${{secrets.DOCKER_USER}}
         DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
       run: |
-        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD 
-      
+        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+
     - name: Build and push image
       run: make docker-push
