@@ -1,5 +1,6 @@
-from datetime import datetime, timedelta, timezone
+from datetime import datetime
 from dataclasses import dataclass
+
 
 @dataclass
 class Summary:
@@ -12,42 +13,36 @@ class Summary:
         self.company_name = company_name
         self.earnings_release_date = earnings_release_date
 
-
     @property
     def ticker(self) -> str:
         return self.__ticker
 
-
     @ticker.setter
     def ticker(self, value: str) -> None:
-        if (type(value) != str):
+        if isinstance(value, str):
             raise ValueError('invalid type for ticker')
         self.__ticker = value
-
 
     @property
     def company_name(self) -> str:
         return self.__company_name
 
-
     @company_name.setter
     def company_name(self, value: str) -> None:
-        if (type(value) != str):
+        if isinstance(value, str):
             raise ValueError('invalid type for company name')
         self.__company_name = value
-
 
     @property
     def earnings_release_date(self) -> datetime:
         return self.__earnings_release_date
 
-
     @earnings_release_date.setter
     def earnings_release_date(self, value: str) -> None:
-        if (type(value) != str):
+        if isinstance(value, str):
             raise ValueError('invalid type for earnings release date')
-        self.__earnings_release_date = datetime.fromisoformat(value.replace('Z', '+00:00'))
-
+        self.__earnings_release_date = datetime.fromisoformat(
+            value.replace('Z', '+00:00'))
 
     @staticmethod
     def from_dict(obj: list) -> 'Summary':

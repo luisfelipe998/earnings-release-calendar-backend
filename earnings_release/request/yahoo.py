@@ -35,9 +35,9 @@ class YahooRequester(Requester):
             "size": 250
         })
         headers = {
-        'cookie': 'A1=d=AQABBF-0PGMCEEasJHIJJgsf_qMXS6QWQ2gFEgEBAQEFPmNGYwAAAAAA_eMAAA&S=AQAAAq5vEICHrx1CxvcnKMAnfRs; A3=d=AQABBF-0PGMCEEasJHIJJgsf_qMXS6QWQ2gFEgEBAQEFPmNGYwAAAAAA_eMAAA&S=AQAAAq5vEICHrx1CxvcnKMAnfRs; A1S=d=AQABBF-0PGMCEEasJHIJJgsf_qMXS6QWQ2gFEgEBAQEFPmNGYwAAAAAA_eMAAA&S=AQAAAq5vEICHrx1CxvcnKMAnfRs&j=WORLD; cmp=t=1664922723&j=0&u=1---',
-        'Content-Type': 'application/json',
-        'User-Agent': ''
+            'cookie': 'A1=d=AQABBF-0PGMCEEasJHIJJgsf_qMXS6QWQ2gFEgEBAQEFPmNGYwAAAAAA_eMAAA&S=AQAAAq5vEICHrx1CxvcnKMAnfRs; A3=d=AQABBF-0PGMCEEasJHIJJgsf_qMXS6QWQ2gFEgEBAQEFPmNGYwAAAAAA_eMAAA&S=AQAAAq5vEICHrx1CxvcnKMAnfRs; A1S=d=AQABBF-0PGMCEEasJHIJJgsf_qMXS6QWQ2gFEgEBAQEFPmNGYwAAAAAA_eMAAA&S=AQAAAq5vEICHrx1CxvcnKMAnfRs&j=WORLD; cmp=t=1664922723&j=0&u=1---',
+            'Content-Type': 'application/json',
+            'User-Agent': ''
         }
 
         response = await requests.post(url, headers=headers, data=payload)
@@ -45,7 +45,7 @@ class YahooRequester(Requester):
         summaries = []
         if response.status_code != 200:
             return summaries
-        
+
         for row in response.json()["finance"]["result"][0]["documents"][0]["rows"]:
             summaries.append(Summary.from_dict(row))
 

@@ -1,16 +1,16 @@
 from unittest import IsolatedAsyncioTestCase
-
 from earnings_release.dates.get_press_release_dates_by_tickers import GetPressReleaseDatesByTickersHandler
 from tests.mock.requester_mock import MockRequester
 
+
 class TestGetPressReleaseDatesByTicker(IsolatedAsyncioTestCase):
     async def test_should_get_by_tickers_successfully(self):
-        input = [ "GOOGL", "msft", "invalid" ]
+        input_body = ["GOOGL", "msft", "invalid"]
         mock_requester = MockRequester()
         handler = GetPressReleaseDatesByTickersHandler(mock_requester)
 
-        response = await handler.handle(input)
-        
+        response = await handler.handle(input_body)
+
         self.assertEqual(len(response), 3)
         self.assertEqual(response[0]["ticker"], "GOOGL")
         self.assertEqual(response[0]["company_name"], "Alphabet Inc")
@@ -23,5 +23,3 @@ class TestGetPressReleaseDatesByTicker(IsolatedAsyncioTestCase):
         self.assertEqual(response[2]["ticker"], "INVALID")
         self.assertEqual(response[2]["company_name"], "unknown (not found)")
         self.assertEqual(len(response[2]["earnings_release_date"]), 0)
-
-
