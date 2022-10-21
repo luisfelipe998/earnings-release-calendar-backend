@@ -15,4 +15,4 @@ coverage = "*"
 python_version = "3.9"
 
 [scripts]
-test = make run-tests
+test = "make run-tests"
