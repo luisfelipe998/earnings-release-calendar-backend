@@ -13,8 +13,9 @@ docker-run: docker-build
 	docker run -p 8000:8000 -d ${TAG}
 
 run-tests:
-	pipenv run coverage run -m unittest
+	pipenv run python -m unittest
 
-coverage: run-tests
+coverage:
+	pipenv run coverage run -m unittest
 	coverage html
 	coverage report
