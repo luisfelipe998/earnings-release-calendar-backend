@@ -1,0 +1,6 @@
+[run]
+branch = True
+source = ./earnings_release
+
+[html]
+directory = html_report
