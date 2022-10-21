@@ -24,7 +24,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: Install pipenv
-        run: pip install pipenv
+        run: pip install pipenv coverage
 
       - name: Install dependencies
         run: pipenv install
