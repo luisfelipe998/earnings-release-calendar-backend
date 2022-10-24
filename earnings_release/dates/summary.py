@@ -19,7 +19,7 @@ class Summary:
 
     @ticker.setter
     def ticker(self, value: str) -> None:
-        if isinstance(value, str):
+        if not isinstance(value, str):
             raise ValueError('invalid type for ticker')
         self.__ticker = value
 
@@ -29,7 +29,7 @@ class Summary:
 
     @company_name.setter
     def company_name(self, value: str) -> None:
-        if isinstance(value, str):
+        if not isinstance(value, str):
             raise ValueError('invalid type for company name')
         self.__company_name = value
 
@@ -39,7 +39,7 @@ class Summary:
 
     @earnings_release_date.setter
     def earnings_release_date(self, value: str) -> None:
-        if isinstance(value, str):
+        if not isinstance(value, str):
             raise ValueError('invalid type for earnings release date')
         self.__earnings_release_date = datetime.fromisoformat(
             value.replace('Z', '+00:00'))

@@ -6,4 +6,4 @@ RUN pip install pipenv
 RUN pipenv install
 
 EXPOSE 8000
-ENTRYPOINT ["./entrypoint.sh"]
+CMD ["./entrypoint.sh"]
