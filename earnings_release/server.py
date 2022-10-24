@@ -13,6 +13,11 @@ get_press_release_dates_by_ticker_handler = GetPressReleaseDatesByTickerHandler(
 get_press_release_dates_by_tickers_handler = GetPressReleaseDatesByTickersHandler(yahoo_requester)
 
 
+@app.get("/")
+async def health_check(_):
+    return response.json({"status": "UP"})
+
+
 @app.get("/press-release-dates/<ticker>")
 async def get_press_release_dates_by_ticker(_, ticker):
     try:

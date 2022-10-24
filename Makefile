@@ -1,7 +1,7 @@
 TAG=luisfelipe998/erc-backend
 
 run-local:
-	python3 main.py
+	pipenv run python3 main.py
 
 docker-build:
 	docker build -t ${TAG} . 
