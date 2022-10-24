@@ -46,7 +46,7 @@ class Summary:
 
     @staticmethod
     def from_dict(obj: list) -> 'Summary':
-        if len(obj) == 2:
+        if len(obj) < 3:
             raise IndexError("input does not have 3 positions")
 
         return Summary(obj[0], obj[1], obj[2])

@@ -39,4 +39,4 @@ class TestSummary(unittest.TestCase):
         input_body = ['ticker', 'company_name']
         with self.assertRaises(IndexError) as context:
             Summary.from_dict(input_body)
-        self.assertTrue('input_body does not have 3 positions' in str(context.exception))
+        self.assertTrue('input does not have 3 positions' in str(context.exception))
