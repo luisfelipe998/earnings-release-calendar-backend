@@ -38,11 +38,6 @@ jobs:
       - name: Build and push image
         run: make docker-push
 
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Release
-        uses: softprops/action-gh-release@v1
-
   deploy:
     needs: build
     runs-on: ubuntu-latest
