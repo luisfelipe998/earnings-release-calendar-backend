@@ -41,16 +41,11 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Deploy container to Heroku.
-        uses: gonuit/heroku-docker-deploy@v1.3.3
+    steps:          
+      - name: Wait for Render Deployment
+        uses: bounceapp/render-action@0.2.0
         with:
-          email: luisfelipeborsoi998@hotmail.com
-          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-          heroku_app_name: erc-backend
-          dockerfile_directory: ./
-          dockerfile_name: Dockerfile
-          docker_options: "--no-cache"
-          process_type: web
+          email: ${{ secrets.RENDER_EMAIL }}
+          password: ${{ secrets.RENDER_PASSWORD }}
+          token: ${{ secrets.RENDER_GITHUB_TOKEN }}
+          service-id: ${{ secrets.RENDER_SRV }}
