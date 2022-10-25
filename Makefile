@@ -19,7 +19,3 @@ coverage:
 	pipenv run coverage run -m unittest
 	coverage html
 	coverage report
-
-deploy:
-	heroku git:remote -a erc-backend
-	git push heroku main
