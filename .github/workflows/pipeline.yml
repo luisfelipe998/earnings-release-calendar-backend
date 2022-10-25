@@ -37,6 +37,13 @@ jobs:
 
       - name: Build and push image
         run: make docker-push
+        
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+
 
   deploy:
     needs: build
@@ -44,7 +51,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: deploy container to Heroku.
+      - name: Deploy container to Heroku.
         uses: gonuit/heroku-docker-deploy@v1.3.3
         with:
           email: luisfelipeborsoi998@hotmail.com
