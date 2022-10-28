@@ -1,0 +1,113 @@
+openapi: 3.0.3
+info:
+  title: Earnings Release Calendar Backend
+  description: API to retrieve press release dates of US stocks
+  version: "1.0"
+  contact:
+    name: https://github.com/luisfelipe998
+  license:
+    name: MIT
+servers:
+  - url: https://erc-backend.onrender.com
+    description: Prod server
+paths:
+  /press-release-dates/{ticker}:
+    get:
+      description: >-
+        Get press release dates by ticker
+      parameters:
+        - name: ticker
+          in: path
+          required: true
+          description: The ticker of the stock to retrieve
+          schema:
+            type: string
+      responses:
+        200:
+          description: The press release dates
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PressReleaseDate"
+        404:
+          description: No stock was found
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Error"
+        500:
+          description: The request cannot be completed because the server encountered an unexpected condition.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /press-release-dates:
+    post:
+      description: >-
+        Get press release dates by ticker
+      requestBody:
+        description: List of tickers
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TickersList"
+      responses:
+        200:
+          description: The press release dates
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PressReleaseDatesList"
+        400:
+          description: The request was invalid.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        500:
+          description: The request cannot be completed because the server encountered an unexpected condition.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+components:
+  schemas:
+    TickersList:
+      type: array
+      items:
+        type: string
+      example: ["MSFT", "GOOGL"]
+
+    PressReleaseDate:
+      type: object
+      properties:
+        ticker:
+          type: string
+          description: Ticker searched
+          example: "MSFT"
+        company_name:
+          type: string
+          description: Company name related to the ticker
+          example: "Microsoft Corp"
+        earnings_release_date:
+          type: array
+          items:
+            type: string
+          example: ["2023-10-23T10:59:00Z", "2023-07-24T10:59:00Z"]
+
+    PressReleaseDatesList:
+      type: array
+      items:
+        $ref: "#/components/schemas/PressReleaseDate"
+
+    Error:
+      description: Error response
+      type: object
+      required:
+        - "error"
+      properties:
+        error:
+          type: string
