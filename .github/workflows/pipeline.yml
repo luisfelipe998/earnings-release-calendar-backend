@@ -1,9 +1,7 @@
-name: Makefile CI
+name: Pipeline
 
 on:
   push:
-    branches: "**"
-  pull_request:
     branches: ["main"]
 
 jobs:
@@ -41,12 +39,12 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    steps:          
+    steps:
       - name: Deploy
         uses: fjogeleit/http-request-action@v1
         with:
           url: ${{secrets.RENDER_DEPLOY_WEBHOOK}}
-          method: 'GET'
+          method: "GET"
       - name: Wait for Render Deployment
         uses: bounceapp/render-action@0.2.0
         with:
