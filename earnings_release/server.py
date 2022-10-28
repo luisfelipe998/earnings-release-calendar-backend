@@ -1,5 +1,5 @@
 import json
-from sanic import Sanic, response
+from sanic import Sanic, response, log
 from sanic.request import Request
 from earnings_release.dates.get_press_release_dates_by_ticker import GetPressReleaseDatesByTickerHandler
 from earnings_release.dates.get_press_release_dates_by_tickers import GetPressReleaseDatesByTickersHandler
@@ -24,8 +24,8 @@ async def get_press_release_dates_by_ticker(_, ticker):
         return response.json(await get_press_release_dates_by_ticker_handler.handle(ticker))
     except ValueError as error:
         return response.json({"error": str(error)}, status=404)
-    except Exception:
-        return internal_server_error()
+    except Exception as error:
+        return internal_server_error(error)
 
 
 @app.post("/press-release-dates")
@@ -36,19 +36,21 @@ async def get_press_release_dates_by_tickers(request: Request):
             return bad_request_not_list_input()
 
         return response.json(await get_press_release_dates_by_tickers_handler.handle(input_body))
-    except json.decoder.JSONDecodeError:
-        return bad_request_not_list_input()
-    except Exception:
-        return internal_server_error()
+    except json.decoder.JSONDecodeError as error:
+        return bad_request_not_list_input(error)
+    except Exception as error:
+        return internal_server_error(error)
 
 
 def is_list_of_strings(input_body) -> bool:
     return isinstance(input_body, list) and len(input_body) > 0 and isinstance(input_body[0], str)
 
 
-def bad_request_not_list_input():
+def bad_request_not_list_input(error="request body is malformed."):
+    log.logger.error('error reading body: %s', str(error))
     return response.json({"error": "request body is malformed. Make sure it is a array of strings with at least one item."}, status=400)
 
 
-def internal_server_error():
+def internal_server_error(error):
+    log.logger.error("unexpected error: %s", str(error))
     return response.json({"error": "Sorry for the inconvenience. An internal error ocurred getting press release dates."}, status=500)
