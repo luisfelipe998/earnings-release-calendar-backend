@@ -73,6 +73,36 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
+  /suggestions/companies:
+    get:
+      description: >-
+        Get companies suggestions by freetext
+      parameters:
+        - name: q
+          in: query
+          required: true
+          description: The free text input to search for companies
+          schema:
+            type: string
+      responses:
+        200:
+          description: The companies suggestions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CompanyInfoList"
+        400:
+          description: The request was invalid.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        500:
+          description: The request cannot be completed because the server encountered an unexpected condition.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
 components:
   schemas:
     TickersList:
@@ -102,6 +132,41 @@ components:
       type: array
       items:
         $ref: "#/components/schemas/PressReleaseDate"
+
+    CompanyInfo:
+      type: object
+      properties:
+        ticker:
+          type: string
+          description: Ticker of the company
+          example: "MSFT"
+        company_name:
+          type: string
+          description: Name of the company
+          example: "Microsoft Corp"
+        exchange:
+          type: string
+          description: "exchange in which the company is traded"
+          items:
+            type: string
+          example: "NASDAQ"
+        sector:
+          type: string
+          description: "sector of the company"
+          items:
+            type: string
+          example: "Technology"
+        industry:
+          type: string
+          description: "industry of the company"
+          items:
+            type: string
+          example: "Software—Infrastructure"
+
+    CompanyInfoList:
+      type: array
+      items:
+        $ref: "#/components/schemas/CompanyInfo"
 
     Error:
       description: Error response

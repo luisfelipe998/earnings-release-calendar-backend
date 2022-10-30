@@ -4,3 +4,4 @@
 
 API to retrieve press release dates information from Yahoo finance. 
 Learn more about it on its [openapi documentation](https://luisfelipe998.github.io/earnings-release-calendar-backend/openapi/v1/erc-backend.html).
+
