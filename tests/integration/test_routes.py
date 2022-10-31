@@ -57,29 +57,29 @@ class TestPostGetPressReleasesDatesRoute(IsolatedAsyncioTestCase):
 
 
 class TestGetCompanyInfoSuggestionsRoute(IsolatedAsyncioTestCase):
-    async def test_should_return_200_and_3_items_when_get_company_suggestions_by_query_g(self):
-        _, response = await app.asgi_client.get('/suggestions/companies?q=g')
+    async def test_should_return_200_and_3_items_when_get_company_suggestions_by_query_go(self):
+        _, response = await app.asgi_client.get('/suggestions/companies?q=go')
         self.assertEqual(response.status, 200)
         data = json.loads(response.text)
         self.assertEqual(data, [
             {
-                "ticker": "G",
-                "company_name": "Genpact Limited",
-                "exchange": "Genpact Limited",
-                "sector": "Technology",
-                "industry": "Information Technology Services"
-            },
-            {
-                "ticker": "GME",
-                "company_name": "GameStop Corporation",
-                "exchange": "GameStop Corporation",
-                "sector": "Consumer Cyclical",
-                "industry": "Specialty Retail"
+                "ticker": "GO",
+                "company_name": "Grocery Outlet Holding Corp.",
+                "exchange": "NASDAQ",
+                "sector": "Consumer Defensive",
+                "industry": "Grocery Stores"
             },
             {
                 "ticker": "GOOG",
                 "company_name": "Alphabet Inc.",
-                "exchange": "Alphabet Inc.",
+                "exchange": "NASDAQ",
+                "sector": "Communication Services",
+                "industry": "Internet Content & Information"
+            },
+            {
+                "ticker": "GOOGL",
+                "company_name": "Alphabet Inc.",
+                "exchange": "NASDAQ",
                 "sector": "Communication Services",
                 "industry": "Internet Content & Information"
             }
