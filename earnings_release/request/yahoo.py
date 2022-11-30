@@ -60,7 +60,7 @@ class YahooRequester(Requester):
             raise Exception('could not fetch data from yahoo finance API')
 
         company_info_suggestions = [CompanyInfo(row.get('symbol'),
-                                                row.get('shortname'),
+                                                row.get('longname'),
                                                 row.get('exchDisp'),
                                                 row.get('sector'),
                                                 row.get('industry'),

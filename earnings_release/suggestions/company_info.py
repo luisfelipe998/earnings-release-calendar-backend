@@ -34,7 +34,7 @@ class CompanyInfo:
 
     @company_name.setter
     def company_name(self, value: str) -> None:
-        if not isinstance(value, str):
+        if not isinstance(value, str) and value is not None:
             raise ValueError('invalid type for company name')
         self.__company_name = value
 

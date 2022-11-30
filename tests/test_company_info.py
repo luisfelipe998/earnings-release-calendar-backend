@@ -54,10 +54,10 @@ class TestCompanyInfo(unittest.TestCase):
                         input_body['asset_type'])
         self.assertTrue('invalid type for ticker' in str(context.exception))
 
-    def test_should_not_create_company_info_when_company_name_is_not_informed(self):
+    def test_should_not_create_company_info_when_company_name_is_not_string(self):
         input_body = {
             "ticker": "some-ticker",
-            "company_name": None,
+            "company_name": 1,
             "exchange": "some-exchange",
             "sector": "some-sector",
             "industry": "some-industry",

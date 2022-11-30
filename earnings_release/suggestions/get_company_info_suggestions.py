@@ -13,9 +13,9 @@ class GetCompanyInfoSuggestionsHandler:
         for suggestion in suggestions:
             if suggestion.type is None or suggestion.type.lower() != 'equity':
                 continue
-            if suggestion.exchange is None or suggestion.exchange.lower() not in ['nyse', 'nasdaq']:
+            if suggestion.exchange is None or suggestion.exchange.lower() not in ['nyse', 'nasdaq', 'são paulo']:
                 continue
-            if suggestion.industry is None or suggestion.industry is None:
+            if suggestion.company_name is None or suggestion.industry is None or suggestion.sector is None:
                 continue
             fitered_suggestions.append(suggestion)
 

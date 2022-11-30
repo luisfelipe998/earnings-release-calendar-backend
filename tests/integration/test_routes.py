@@ -57,18 +57,11 @@ class TestPostGetPressReleasesDatesRoute(IsolatedAsyncioTestCase):
 
 
 class TestGetCompanyInfoSuggestionsRoute(IsolatedAsyncioTestCase):
-    async def test_should_return_200_and_3_items_when_get_company_suggestions_by_query_go(self):
-        _, response = await app.asgi_client.get('/suggestions/companies?q=go')
+    async def test_should_return_200_and_2_items_when_get_company_suggestions_by_query_goog(self):
+        _, response = await app.asgi_client.get('/suggestions/companies?q=goog')
         self.assertEqual(response.status, 200)
         data = json.loads(response.text)
         self.assertEqual(data, [
-            {
-                "ticker": "GO",
-                "company_name": "Grocery Outlet Holding Corp.",
-                "exchange": "NASDAQ",
-                "sector": "Consumer Defensive",
-                "industry": "Grocery Stores"
-            },
             {
                 "ticker": "GOOG",
                 "company_name": "Alphabet Inc.",

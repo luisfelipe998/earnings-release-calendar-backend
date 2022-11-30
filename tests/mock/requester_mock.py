@@ -34,6 +34,8 @@ mock_company_info_data = [
                 exchange="nyse", sector="sector", industry="industry", asset_type="equity"),
     CompanyInfo(ticker="nasdaq-ticker", company_name="nasdaq-company",
                 exchange="nasdaq", sector="sector", industry="industry", asset_type="equity"),
+    CompanyInfo(ticker="bovespa-ticker", company_name="bovespa-company",
+                exchange="são paulo", sector="sector", industry="industry", asset_type="equity"),
     CompanyInfo(ticker="wrong-exchange-ticker", company_name="wrong-exchange-company",
                 exchange="wrong-exchange", sector="sector", industry="industry", asset_type="equity"),
     CompanyInfo(ticker="wrong-asset-type-ticker", company_name="wrong-asset-type-company",

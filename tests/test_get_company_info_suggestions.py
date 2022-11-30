@@ -12,6 +12,7 @@ class TestGetCompanyInfoSuggestions(IsolatedAsyncioTestCase):
 
         response = await handler.handle(input_param)
 
-        self.assertEqual(len(response), 2)
+        self.assertEqual(len(response), 3)
         self.assertEqual(response[0]['ticker'], "nyse-ticker")
         self.assertEqual(response[1]['ticker'], "nasdaq-ticker")
+        self.assertEqual(response[2]['ticker'], "bovespa-ticker")
